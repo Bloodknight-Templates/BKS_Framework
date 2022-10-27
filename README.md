@@ -6,6 +6,7 @@ Designed to be a quick and easy startup project for just getting down to writing
 ## Libraries
 - GLFW [https://github.com/glfw/glfw]
 - glad [https://github.com/Dav1dde/glad]
+- GLM [https://github.com/g-truc/glm]
 - stb_image (may add more later) [https://github.com/nothings/stb]
 
 ### Testing
