@@ -6,11 +6,25 @@ project(BKSFramework)
 file(GLOB_RECURSE SOURCE_FILES 
 	${CMAKE_SOURCE_DIR}/src/*.c
 	${CMAKE_SOURCE_DIR}/src/*.cpp)
-	
+
 # Add header files
 file(GLOB_RECURSE HEADER_FILES 
 	${CMAKE_SOURCE_DIR}/src/*.h
 	${CMAKE_SOURCE_DIR}/src/*.hpp)
+
+# Add Dear ImGui
+set(DEAR_IMGUI_PREFIX "${CMAKE_SOURCE_DIR}/include/imgui" CACHE STRING "Path to Dear ImGui")
+# add Dear ImGui sources manually
+list(APPEND SOURCE_FILES
+	${DEAR_IMGUI_PREFIX}/imgui.cpp
+  #${DEAR_IMGUI_PREFIX}/imgui_stdlib.cpp
+	${DEAR_IMGUI_PREFIX}/imgui_draw.cpp
+	${DEAR_IMGUI_PREFIX}/imgui_tables.cpp
+	${DEAR_IMGUI_PREFIX}/imgui_widgets.cpp
+	${DEAR_IMGUI_PREFIX}/imgui_impl_glfw.cpp
+	${DEAR_IMGUI_PREFIX}/imgui_impl_opengl3.cpp
+	${DEAR_IMGUI_PREFIX}/imgui_demo.cpp
+)
 
 # Add .lib files
 link_directories(${CMAKE_SOURCE_DIR}/lib) 
@@ -39,14 +53,15 @@ message(STATUS "GLM included at ${GLM_INCLUDE_DIR}")
 find_package(GLFW3 REQUIRED)
 message(STATUS "Found GLFW3 in ${GLFW3_INCLUDE_DIR}")
 
-
 # STB_IMAGE
 add_library(STB_IMAGE "thirdparty/stb_image.cpp")
 
 # GLAD
 add_library(GLAD "thirdparty/glad.c")
+
 # Put all libraries into a variable
 set(LIBS glfw3 opengl32 STB_IMAGE GLAD)
+
 # Define the include DIRs
 include_directories(
 	"${CMAKE_SOURCE_DIR}/src"
@@ -80,15 +95,6 @@ if(MSVC_IDE)
 	GroupSources(src)
 endif()
 #####
-
-
-# Copy dlls
-if(WIN32)
-	add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy_directory
-		"${PROJECT_SOURCE_DIR}/dlls"
-		$<TARGET_FILE_DIR:${PROJECT_NAME}>)
-endif()
 
 
 

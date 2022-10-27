@@ -8,6 +8,7 @@ Designed to be a quick and easy startup project for just getting down to writing
 - glad [https://github.com/Dav1dde/glad]
 - GLM [https://github.com/g-truc/glm]
 - stb_image (may add more later) [https://github.com/nothings/stb]
+- imgui [https://github.com/ocornut/imgui]
 
 ### Testing
 In the `testing` subfolder there exists a few files whos contents can be copied to replace the main.cpp file, these are there so that eac part of the library set up can be tested.
